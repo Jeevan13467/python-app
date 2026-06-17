@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'flask-calculator:latest'
         DOCKERHUB_USERNAME = 'jeeavan7790'
-        DOCKERHUB_ACCESS_TOKEN = credentials('docker-hub-token')
+        DOCKERHUB_ACCESS_TOKEN = 'dckr_pat_zjs9Mx10B6XJaMFcc_N3WfGDm6M'
         DOCKER_REGISTRY = 'jeevan7790/python-app'
     }
     
