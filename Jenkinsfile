@@ -39,9 +39,9 @@ pipeline {
             steps {
                 script {
                     sh """
-                    echo ${dckr_pat_zjs9Mx10B6XJaMFcc_N3WfGDm6M} | sudo docker login -u ${DOCKERHUB_USERNAME} --password-stdin
-                     docker tag ${DOCKER_IMAGE} ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE}
-                    docker push ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE}
+                    echo ${dckr_pat_zjs9Mx10B6XJaMFcc_N3WfGDm6M} | sudo docker login -u ${jeevan7790} --password-stdin
+                     docker tag ${DOCKER_IMAGE} ${jeevan7790}/${DOCKER_IMAGE}
+                    docker push ${jeevan7790}/${DOCKER_IMAGE}
                     """
                 }
             }
