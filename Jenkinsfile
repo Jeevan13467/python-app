@@ -1,54 +1,54 @@
 pipeline {
-    agent any
-
-
- environment {
-
+    agent any 
+    
+    environment {
         DOCKER_IMAGE = 'flask-calculator:latest'
         DOCKERHUB_USERNAME = 'jeeavan7790'
         DOCKERHUB_ACCESS_TOKEN = credentials('docker-hub-token')
         DOCKER_REGISTRY = 'jeevan7790/python-app'
- }
-
- stages{
-
-    stage('checkout/source'){
-        steps {
-            git 'https://github.com/Jeevan13467/python-app.git'
-        }
     }
-
- }
-    stage('Build Docker image'){
-        steps{
-            script{
-                sh "pwd"      
-                sh docker build -t $(DOCKER_IMAGE)
-                      }
+    
+    // OPEN STAGES ONCE HERE
+    stages {
+        
+        stage('checkout/source') {
+            steps {
+                git 'https://github.com/Jeevan13467/python-app.git'
+            }
         }
-    }
-   stages{
-     stage('test'){
-        steps{
-            sh"""
-            sudo docker run --name test container $(DOCKER_IMAGE) /bin/sh -c 'python -m unittest discover -s /app/tests'
-              sudo docker rm test-container
-              """
+        
+        stage('Build Docker image') {
+            steps {
+                script {
+                    sh "pwd"
+                    // Fixed missing quotes around your docker build command here too!
+                    sh "docker build -t ${DOCKER_IMAGE} ." 
+                }
+            }
         }
+        
+        stage('test') {
+            steps {
+                sh """
+                sudo docker run --name test-container ${DOCKER_IMAGE} /bin/sh -c 'python -m unittest discover -s /app/tests'
+                sudo docker rm test-container
+                """
+            }
+        }
+        
         stage('Push to Docker Registry') {
             steps {
                 script {
                     sh """
-                    echo ${dockerhub_token} | sudo docker login -u ${DOCKERHUB_USERNAME} --password-stdin
-
+                    echo ${DOCKERHUB_ACCESS_TOKEN} | sudo docker login -u ${DOCKERHUB_USERNAME} --password-stdin
                     sudo docker tag ${DOCKER_IMAGE} ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE}
-
                     sudo docker push ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE}
                     """
                 }
             }
         }
-         stage('Deploy') {
+        
+        stage('Deploy') {
             steps {
                 script {
                     sh """
@@ -57,17 +57,16 @@ pipeline {
                 }
             }
         }
-    }
-
+        
+    } // CLOSE STAGES ONCE HERE
+    
     post {
         success {
             echo 'Pipeline executed successfully!'
         }
-
         failure {
             echo 'Pipeline failed.'
         }
     }
 }
-     }
    
