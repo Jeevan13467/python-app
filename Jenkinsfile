@@ -36,23 +36,18 @@ pipeline {
         }
         
        stage('Push to Docker Registry') {
-         steps {
-        // This block safely injects your username and token from Jenkins credentials
-        withCredentials([usernamePassword(credentialsId: 'docker-hub-token', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_ACCESS_TOKEN')]) {
-            script {
-                sh """
-                # Note the backslash before the dollar signs. This tells Groovy to let the shell handle the variables securely!
-                echo \$DOCKERHUB_ACCESS_TOKEN | docker login -u \$DOCKERHUB_USERNAME --password-stdin
+            steps {
+                script {
+                    sh """
+                    echo ${DOCKERHUB_ACCESS_TOKEN} | sudo docker login -u ${DOCKERHUB_USERNAME} --password-stdin
 
-                docker tag ${DOCKER_IMAGE} \$DOCKERHUB_USERNAME/${DOCKER_IMAGE}
+                    sudo docker tag ${DOCKER_IMAGE} ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE}
 
-                docker push \$DOCKERHUB_USERNAME/${DOCKER_IMAGE}
-                """
+                    sudo docker push ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE}
+                    """
+                }
             }
-        }
-    }
-}
-        
+        }  
         stage('Deploy') {
             steps {
                 script {
