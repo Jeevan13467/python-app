@@ -40,8 +40,8 @@ pipeline {
                 script {
                     sh """
                     echo ${DOCKERHUB_ACCESS_TOKEN} | sudo docker login -u ${DOCKERHUB_USERNAME} --password-stdin
-                    sudo docker tag ${DOCKER_IMAGE} ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE}
-                    sudo docker push ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE}
+                     docker tag ${DOCKER_IMAGE} ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE}
+                    docker push ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE}
                     """
                 }
             }
@@ -51,7 +51,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                    sudo docker run -d -p 5000:80 ${DOCKER_IMAGE}
+                    docker run -d -p 5000:80 ${DOCKER_IMAGE}
                     """
                 }
             }
