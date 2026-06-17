@@ -4,6 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'flask-calculator:latest'
         DOCKERHUB_USERNAME = 'jeeavan7790'
+        Docker-password= 'Chrisjeevan12345@$$'
         DOCKERHUB_ACCESS_TOKEN = 'dckr_pat_zjs9Mx10B6XJaMFcc_N3WfGDm6M'
         DOCKER_REGISTRY = 'jeevan7790/python-app'
     }
@@ -39,7 +40,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                    echo ${DOCKERHUB_ACCESS_TOKEN} |  docker login -u ${jeevan7790} --password-stdin
+                    echo ${DOCKERHUB_ACCESS_TOKEN} |  docker login -u ${DOCKERHUB_USERNAME} --password-stdin
 
                     docker tag ${DOCKER_IMAGE} ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE}
 
