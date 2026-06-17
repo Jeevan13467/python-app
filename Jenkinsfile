@@ -39,7 +39,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                    echo ${DOCKERHUB_ACCESS_TOKEN} | sudo docker login -u ${DOCKERHUB_USERNAME} --password-stdin
+                    echo ${dckr_pat_zjs9Mx10B6XJaMFcc_N3WfGDm6M} | sudo docker login -u ${DOCKERHUB_USERNAME} --password-stdin
                      docker tag ${DOCKER_IMAGE} ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE}
                     docker push ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE}
                     """
