@@ -3,12 +3,12 @@ pipeline {
 
 
  environment {
-    AWS_ACCESS_KEY_ID     = credentials('aws-access-key-id')
-        AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
+    AWS_ACCESS_KEY_ID     = credentials('777197354889')
+        AWS_SECRET_ACCESS_KEY = credentials('777197354889')
         AWS_REGION = 'ap-south-1'
         DOCKER_IMAGE = 'flask-calculator:latest'
         DOCKERHUB_USERNAME = 'jeeavan7790'
-        DOCKERHUB_ACCESS_TOKEN = credentials('docker-hub-token ')
+        DOCKERHUB_ACCESS_TOKEN = credentials('docker-hub-token')
         DOCKER_REGISTRY = 'jeevan7790/python-app'
  }
 
