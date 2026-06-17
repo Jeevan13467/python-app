@@ -20,7 +20,6 @@ pipeline {
         stage('Build Docker image') {
             steps {
                 script {
-                    sh "pwd"
                     // Fixed missing quotes around your docker build command here too!
                     sh "docker build -t ${DOCKER_IMAGE} ." 
                 }
