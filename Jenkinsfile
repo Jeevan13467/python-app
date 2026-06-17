@@ -40,8 +40,10 @@ pipeline {
                 script {
                     sh """
                     echo ${DOCKERHUB_ACCESS_TOKEN} | sudo docker login -u ${DOCKERHUB_USERNAME} --password-stdin
-                     docker tag ${DOCKER_IMAGE} ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE}
-                    docker push ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE}
+
+                    sudo docker tag ${DOCKER_IMAGE} ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE}
+
+                    sudo docker push ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE}
                     """
                 }
             }
