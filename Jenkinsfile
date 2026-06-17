@@ -29,8 +29,8 @@ pipeline {
         stage('test') {
             steps {
                 sh """
-                sudo docker run --name test-container ${DOCKER_IMAGE} /bin/sh -c 'python -m unittest discover -s /app/tests'
-                sudo docker rm test-container
+                docker run --name test-container ${DOCKER_IMAGE} /bin/sh -c 'python -m unittest discover -s /app/tests'
+                docker rm test-container
                 """
             }
         }
