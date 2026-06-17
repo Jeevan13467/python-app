@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        DOCKER_IMAGE = 'flask-calculator:latest'
+        DOCKER_IMAGE = 'firstimage'
         DOCKERHUB_USERNAME = 'jeevan7790'  // Your Docker Hub username
         DOCKERHUB_ACCESS_TOKEN = 'dckr_pat_4n7KabdBBPt7SFkXKTPCUSO3ZkM'  // Your Docker Hub access token
         DOCKER_REGISTRY = 'jeevan7790/python-app'  // Your Docker repository
