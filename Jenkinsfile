@@ -50,7 +50,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                    docker run -d -p 5000:80 ${DOCKER_IMAGE}
+                    docker run -d -p 5001:80 ${DOCKER_IMAGE}
                     """
                 }
             }
