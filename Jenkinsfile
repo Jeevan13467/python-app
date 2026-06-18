@@ -39,7 +39,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                    echo "${DOCKERHUB_ACCESS_TOKEN}" |docker login -u "${DOCKERHUB_USERNAME}" --password-stdin
+                    echo "${DOCKERHUB_ACCESS_TOKEN}" |sudo docker login -u "${DOCKERHUB_USERNAME}" --password-stdin
                     docker tag ${DOCKER_IMAGE} ${DOCKER_REGISTRY}:latest
                     docker push ${DOCKER_REGISTRY}:latest
                     """
